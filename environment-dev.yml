@@ -1,0 +1,30 @@
+# ambiente de desenvolvimento com:
+# apache 2.4, php 7.0, mysql ultima versao, dados
+# salvos em: /var/mysql/data
+#
+#
+
+ web:
+    image: fredericomartini/php:7.0-dev
+    links: 
+        - db
+    volumes: 
+        - "/var/www/:/var/www/"
+    ports:
+        - "7000:80"
+    command: "apache2ctl -D FOREGROUND"
+
+ db:
+    image: mysql:latest
+    environment: 
+        MYSQL_ROOT_PASSWORD: "mysql"
+    volumes_from:
+        - data
+    ports:
+        - "localhost:3306:3306" 
+
+ data:
+    image: busybox:latest
+    volumes:
+        - "/var/mysql/data:/var/lib/mysql"
+

@@ -1,0 +1,38 @@
+#!/bin/bash
+INSTALLED=$(which docker-compose)
+INSTALLED_DOCKER=$(which docker)
+OPTION=$1
+COMPOSE_FILE='environment-dev.yml'
+    if [ ! -e "$INSTALLED_DOCKER" ]; then
+        echo "Docker isn't installed, must be installed first!"
+        exit
+    fi
+
+    if [ ! -e "$INSTALLED" ]; then
+       #instalar 
+       INSTALLED_CURL=$(which curl)
+       if [ ! -e "$INSTALLED_CURL" ]; then
+           sudo apt-get update && sudo apt-get install curl -y
+       fi
+       sudo -i curl -L https://github.com/docker/compose/releases/download/1.7.0/docker-compose-$(uname -s)-$(uname -m) > /usr/local/bin/docker-compose
+       sudo chmod +x /usr/local/bin/docker-compose
+    fi       
+
+
+function run() {
+    case $OPTION in
+            start) 
+                docker-compose -f $COMPOSE_FILE  create
+                docker-compose -f $COMPOSE_FILE  start
+                ;;
+            stop) 
+                docker-compose -f $COMPOSE_FILE stop
+                ;;
+            clear)
+                docker-compose -f $COMPOSE_FILE rm -f
+                ;;
+            *) echo "USAGE: start | stop | clear"
+    esac
+}
+
+run
