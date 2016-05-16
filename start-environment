@@ -29,9 +29,14 @@ function run() {
                 docker-compose -f $COMPOSE_FILE stop
                 ;;
             clear)
+                docker-compose -f $COMPOSE_FILE stop 
                 docker-compose -f $COMPOSE_FILE rm -f
                 ;;
-            *) echo "USAGE: start | stop | clear"
+            copy)
+                sudo cp -R php /bin
+                sudo cp -R composer /bin
+                ;;
+            *) echo "USAGE: start | stop | clear | copy (copy php and composer to /bin/)"
     esac
 }
 
