@@ -22,6 +22,8 @@ COMPOSE_FILE='environment-dev.yml'
 function run() {
     case $OPTION in
             start) 
+                docker-compose -f $COMPOSE_FILE stop 
+                docker-compose -f $COMPOSE_FILE rm --all -f
                 docker-compose -f $COMPOSE_FILE  create
                 docker-compose -f $COMPOSE_FILE  start
                 ;;
