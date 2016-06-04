@@ -2,10 +2,13 @@
 INSTALLED=$(which docker-compose)
 INSTALLED_DOCKER=$(which docker)
 OPTION=$1
-COMPOSE_FILE='environment-dev.yml'
+wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-dev.yml -O /tmp/environment-dev.yml
+COMPOSE_FILE='/tmp/environment-dev.yml'
     if [ ! -e "$INSTALLED_DOCKER" ]; then
         echo "Docker isn't installed, must be installed first!"
-        exit
+        echo 'Running script installation docker...'
+        sleep 2
+        wget -O - https://raw.githubusercontent.com/fredericomartini/shell/master/install_docker.sh | sh
     fi
 
     if [ ! -e "$INSTALLED" ]; then
