@@ -4,13 +4,11 @@ INSTALLED_DOCKER=$(which docker)
 OPTION=$1
 DATABASE=$2
 
-    if [ -e "$DATABASE" && "$DATABASE" == "POSTGRES" ]; then
+    if [ ! -e "$DATABASE" ] && [ "$DATABASE" == "POSTGRES" ]; then
 	DATABASE=postgres
     else
 	DATABASE=mysql
     fi
-#download
-wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-$DATABASE-dev.yml -O /tmp/environment-dev.yml
 
 COMPOSE_FILE='/tmp/environment-dev.yml'
     if [ ! -e "$INSTALLED_DOCKER" ]; then
@@ -32,6 +30,11 @@ COMPOSE_FILE='/tmp/environment-dev.yml'
 
 
 function run() {
+	if [ ! -e "$OPTION" ] && [ "$OPTION" == "start" ]; then
+		#download
+		wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-"$DATABASE"-dev.yml -O /tmp/environment-dev.yml
+	fi
+
     case $OPTION in
             start) 
                 docker-compose -f $COMPOSE_FILE stop 
@@ -55,5 +58,3 @@ function run() {
 }
 
 run
-
-function 

@@ -21,7 +21,7 @@
     volumes_from:
         - data
     ports:
-        - "localhost:5432:5432" 
+        - "localhost:3306:3306" 
 
  data:
     image: busybox:latest
