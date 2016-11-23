@@ -21,10 +21,9 @@
     volumes_from:
         - data
     ports:
-        - "localhost:3306:3306" 
+        - "localhost:3306:3306"
 
  data:
     image: busybox:latest
     volumes:
 	- "/var/mysql/data:/var/lib/mysql"
-
