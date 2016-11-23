@@ -2,7 +2,16 @@
 INSTALLED=$(which docker-compose)
 INSTALLED_DOCKER=$(which docker)
 OPTION=$1
-wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-dev.yml -O /tmp/environment-dev.yml
+DATABASE=$2
+
+    if [ -e "$DATABASE" && "$DATABASE" == "POSTGRES" ]; then
+	DATABASE=postgres
+    else
+	DATABASE=mysql
+    fi
+#download
+wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-$DATABASE-dev.yml -O /tmp/environment-dev.yml
+
 COMPOSE_FILE='/tmp/environment-dev.yml'
     if [ ! -e "$INSTALLED_DOCKER" ]; then
         echo "Docker isn't installed, must be installed first!"
@@ -41,8 +50,10 @@ function run() {
                 sudo cp -R php /bin
                 sudo cp -R composer /bin
                 ;;
-            *) echo "USAGE: start | stop | clear | copy (copy php and composer to /bin/)"
+            *) echo "USAGE: start (MYSQL | POSTGRES) | stop | clear | copy (copy php and composer to /bin/)"
     esac
 }
 
 run
+
+function 

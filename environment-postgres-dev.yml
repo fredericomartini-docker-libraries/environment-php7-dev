@@ -15,16 +15,16 @@
     command: "apache2ctl -D FOREGROUND"
 
  db:
-    image: mysql:latest
+    image: postgres:latest
     environment: 
-        MYSQL_ROOT_PASSWORD: "mysql"
+        POSTGRES_PASSWORD: "postgres"
     volumes_from:
         - data
     ports:
-        - "localhost:3306:3306" 
+        - "localhost:5432:5432" 
 
  data:
     image: busybox:latest
     volumes:
-        - "/var/mysql/data:/var/lib/mysql"
+        - "/var/lib/postgresql/data:/var/lib/postgresql/data"
 
