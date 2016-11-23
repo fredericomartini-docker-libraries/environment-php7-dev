@@ -26,4 +26,4 @@
  data:
     image: busybox:latest
     volumes:
-	- "/var/mysql/data:/var/lib/mysql"
+        - "/var/mysql/data:/var/lib/mysql"
