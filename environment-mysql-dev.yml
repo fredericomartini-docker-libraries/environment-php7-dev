@@ -1,11 +1,13 @@
 # ambiente de desenvolvimento com:
 # apache 2.4, php 7.0, mysql ultima versao, dados
-# salvos em: /var/mysql/data
+# salvos em: /var/mysql/data, arquivo de configuração
+# para inicializar mysql config/mysql/my.cnf
 #
 #
 
- web:
+web:
     image: fredericomartini/php:7.0-dev
+    container_name: apache2-php
     links: 
         - db
     volumes: 
@@ -14,8 +16,9 @@
         - "7000:80"
     command: "apache2ctl -D FOREGROUND"
 
- db:
+db:
     image: mysql:latest
+    container_name: db-mysql
     environment: 
         MYSQL_ROOT_PASSWORD: "mysql"
     volumes_from:
@@ -23,7 +26,8 @@
     ports:
         - "localhost:3306:3306"
 
- data:
+data:
     image: busybox:latest
     volumes:
-        - "/var/mysql/data:/var/lib/mysql"
+        - .config/mysql/:/etc/mysql
+        - /var/mysql/data:/var/lib/mysql
