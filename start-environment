@@ -30,19 +30,6 @@ COMPOSE_FILE=environment-${DATABASE}-dev.yml
 
 
 function run() {
-	if [ ! -e "$OPTION" ] && [ "$OPTION" == "start" ]; then
-		#download
-		wget --output-document /tmp/environment-php7-dev.zip https://codeload.github.com/fredericomartini-docker-libraries/environment-php7-dev/zip/master
-        #enter dir
-        cd /tmp
-        #remove older
-        rm -rf environment-php7-dev-master > /dev/null 2>&1
-        #unzip
-        unzip environment-php7-dev-master.zip > /dev/null 2>&1
-        #enter dir
-        cd environment-php7-dev-master
-	fi
-
     case $OPTION in
             start) 
                 docker-compose -f $COMPOSE_FILE stop 
