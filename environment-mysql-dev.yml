@@ -29,5 +29,5 @@ db:
 data:
     image: busybox:latest
     volumes:
-        - .config/mysql/:/etc/mysql
-        - /var/mysql/data:/var/lib/mysql
+        - "./config/mysql/:/etc/mysql/"
+        - "/var/mysql/data:/var/lib/mysql"
