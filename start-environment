@@ -10,7 +10,7 @@ DATABASE=$2
 	DATABASE=mysql
     fi
 
-COMPOSE_FILE='/tmp/environment-dev.yml'
+COMPOSE_FILE=$(pwd)'/environment-mysql-dev.yml'
     if [ ! -e "$INSTALLED_DOCKER" ]; then
         echo "Docker isn't installed, must be installed first!"
         echo 'Running script installation docker...'
@@ -30,10 +30,10 @@ COMPOSE_FILE='/tmp/environment-dev.yml'
 
 
 function run() {
-	if [ ! -e "$OPTION" ] && [ "$OPTION" == "start" ]; then
+	#if [ ! -e "$OPTION" ] && [ "$OPTION" == "start" ]; then
 		#download
-		wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-"$DATABASE"-dev.yml -O /tmp/environment-dev.yml
-	fi
+		#wget https://raw.githubusercontent.com/fredericomartini-docker-libraries/environment-php7-dev/master/environment-"$DATABASE"-dev.yml -O /tmp/environment-dev.yml
+	#fi
 
     case $OPTION in
             start) 
