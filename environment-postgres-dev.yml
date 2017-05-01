@@ -6,6 +6,7 @@
 
  web:
     image: fredericomartini/php:7.0-dev
+    container_name: apache2-php
     links: 
         - db
     volumes: 
@@ -16,6 +17,7 @@
 
  db:
     image: postgres:latest
+    container_name: db-postgres
     environment: 
         POSTGRES_PASSWORD: "postgres"
     volumes_from:

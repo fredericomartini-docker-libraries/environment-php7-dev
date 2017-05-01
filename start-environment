@@ -10,7 +10,7 @@ DATABASE=$2
 	DATABASE=mysql
     fi
 
-COMPOSE_FILE=$(pwd)'/environment-mysql-dev.yml'
+COMPOSE_FILE=environment-${DATABASE}-dev.yml
     if [ ! -e "$INSTALLED_DOCKER" ]; then
         echo "Docker isn't installed, must be installed first!"
         echo 'Running script installation docker...'
