@@ -6,7 +6,7 @@
 #
 
 web:
-    image: fredericomartini/php:7.0-dev
+    image: fredericomartini/php:5.6-dev
     container_name: apache2-php
     links: 
         - db
